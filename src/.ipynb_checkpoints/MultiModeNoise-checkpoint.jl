@@ -15,7 +15,6 @@ using FiniteDifferences
 include("simulation/simulate_disp_mmf.jl")
 include("simulation/sensitivity_disp_mmf.jl")
 include("simulation/fibers.jl")
-include("simulation/optimization_cw_mmf.jl")
 include("simulation/simulate_cw_mmf.jl")
 
 include("analysis/analysis.jl")
