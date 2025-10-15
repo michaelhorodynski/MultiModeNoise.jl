@@ -65,6 +65,23 @@ function get_params(f0, c0, nx, spatial_window, radius, core_NA, alpha, M, Nt, �
     return βn_ω, Dω, γ, ϕ, x
 end
 
+function get_params(f0, c0, nx, spatial_window, radius, core_NA, alpha, M)
+    
+    λ0 = c0/f0/1e12
+    eps, x, dx = build_GRIN(λ0*1e6, nx, spatial_window, radius, core_NA, alpha)
+    _, ϕ, neff = solve_for_fiber_modes(λ0*1e6, 0., M, dx, dx, eps)
+    modes = reshape(ϕ, (nx, nx, M))
+    dx_SI = dx * 1e-6
+    SK = compute_overlap_tensor(modes, dx_SI)
+    n2 = 2.3e-20
+    ω0 = 2*π*f0*1e12
+    γ = SK*n2*ω0/c0
+    β_prop = 2π*neff/(λ0)
+    δβ = β_prop .- β_prop[1]
+
+    return δβ, γ, ϕ, x
+end
+
 function solve_for_fiber_modes(λ, guess, nmodes, dx, dy, eps) #scalar only for now
     nx, ny = size(eps)
     
