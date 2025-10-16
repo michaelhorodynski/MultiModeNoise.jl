@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: "MultiModeNoise.jl"
+authors:
+  - family-names: "Horodynski"
+    given-names: "Michael"
+version: "1.0.0"
+date-released: "2025-10-16"
+repository-code: "https://github.com/michaelhorodynski/MultiModeNoise.jl"
+license: "MIT"
+preferred-citation:
+  type: software
+  title: "YourRepoName: version 1.0.0"
+  authors:
+    - family-names: "Horodynski"
+      given-names: "Michael"
+  year: 2025
+  repository-code: "https://github.com/michaelhorodynski/MultiModeNoise.jl"
