@@ -9,7 +9,7 @@ repository-code: "https://github.com/michaelhorodynski/MultiModeNoise.jl"
 license: "MIT"
 preferred-citation:
   type: software
-  title: "YourRepoName: version 1.0.0"
+  title: "MultiModeNoise.jl"
   authors:
     - family-names: "Horodynski"
       given-names: "Michael"
