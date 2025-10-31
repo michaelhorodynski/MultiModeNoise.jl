@@ -1,4 +1,7 @@
-function compute_disp_spatial_n_var_n(X, ∂Xkl∂u, U, ϕ, δF_in_ω)
+function compute_disp_spatial_n_var_n(uωf, ∂Xkl∂u, δF_in_ω, U, fiber, sim)
+    ϕ = fiber["ϕ"]
+    @tullio X[i] := ϕ[i,k] * ϕ[i,l] * conj(uωf[ω,k]) * uωf[ω,l]
+    X = sim["Nt"] * sim["ε"] * real.(X)
     @tullio Φ[i] := ϕ[i,k] * ϕ[i,k]
     @tullio no_derivative_term[i] := X[i] * (1 - Φ[i])
     @tullio Xklmn[k,l,m,n] := conj(∂Xkl∂u[k,l,ω,j]) * ∂Xkl∂u[m,n,ω,j]
@@ -7,7 +10,7 @@ function compute_disp_spatial_n_var_n(X, ∂Xkl∂u, U, ϕ, δF_in_ω)
     @tullio XUklmn[k,l,m,n] := δF_in_ω[ω] * conj(∂Xkl∂u_U[k,l,ω]) * ∂Xkl∂u_U[m,n,ω]
     @tullio excess_noise[i] := ϕ[i,k] * ϕ[i,l] * ϕ[i,m] * ϕ[i,n] * XUklmn[k,l,m,n]
     var_X = real.(no_derivative_term + shot_noise + excess_noise)
-    return var_X
+    return X, var_X
 end
 
 function compute_cw_spatial_n_var_n(u0, uf, μf, νf, δF_in, ϕ, P)
